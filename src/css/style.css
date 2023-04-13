@@ -1,0 +1,27 @@
+.margin-1 { margin: 1rem; }
+.text-line-through { text-decoration: line-through; }
+.cursor-pointer { cursor: pointer; }
+.h-200 { height: 200%; }
+
+
+
+.navbar-brand{
+    cursor: pointer;
+}
+
+body, html {
+    height: 100%;
+}
+  
+.bg {
+    /* The image used */
+    /* background-image: url("restaurant.png"); */
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
