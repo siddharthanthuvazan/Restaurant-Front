@@ -17,11 +17,16 @@ const DatePicker = () => {
     return (
         <div>
             <Row  className="d-flex p-2 text-white">
-                <Col><input
+                <Col>
+                <input
                      type="date"
                      onChange={handleChange}
-                     ref={dateInputRef} />
+              />
                  </Col>
+                <Col>
+                    <p>Selected Date: {date}</p>
+                </Col>
+                
            </Row>
          
         </div>

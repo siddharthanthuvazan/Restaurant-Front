@@ -1,8 +1,13 @@
 import React from "react";
-import Login from "./Connection"
 
 
-export default function SecurityController(props){
+import Connection from "./Connection";
+
+ export default function SecurityController(props){
+
+
+   
+
     const backUrl = "http://localhost:8081/security";
 
     function fetchClient(login, password) {
@@ -15,14 +20,21 @@ export default function SecurityController(props){
             .then(response => response.json())
             .then(json => props.setClient({ 
                 token: json.token,
-                id: json.client.id,
-                nom: json.client.nom,
-                prenom: json.client.prenom
-            })
-            );
-    }
+                id: json.user.client_id,
+                nom: json.user.nom,
+                prenom: json.user.prenom,
+                
+            }));
+            
+       }
 
-    return (
-        <Login fetchClient ={(login, password) => fetchClient(login, password)} />
-    )
+     
+    
+    
+
+
+   return(
+    <Connection fetchClient ={(name,password)=>fetchClient(name,password)}/>
+   
+   );
 }

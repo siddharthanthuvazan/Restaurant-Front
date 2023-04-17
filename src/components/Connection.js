@@ -6,6 +6,8 @@ import{Col,Form,InputGroup,Nav,Row,Card} from "react-bootstrap";
 
 
 export default function Connection(props){
+    
+    
 
     const [fields, setFields] = useState({ login: "", password: "" });
 
@@ -25,7 +27,7 @@ export default function Connection(props){
                                 aria-describedby="inpLogin"
                                 placeholder="Veuillez entrer un identifiant"
                                 value={fields.login}
-                                onChange={form => setFields({...fields, login: form.target.value})}
+                                onChange={form => setFields({...fields, login:form.target.value})}
                             />
                         </InputGroup>
                     </Col>
@@ -42,7 +44,7 @@ export default function Connection(props){
                                 aria-describedby="inpPassword"
                                 placeholder="Veuillez entrer un mot de passe"
                                 value={fields.password}
-                                 onChange={form => setFields({...fields, password: form.target.value})}
+                                 onChange={form => setFields({...fields, password:form.target.value})}
                             />
                         </InputGroup>
                     </Col>
@@ -54,14 +56,29 @@ export default function Connection(props){
                                 as={Link} to="/Home"
                                 onClick={() => props.fetchClient(fields.login, fields.password)}
                             >
-                             Submit
+                            <button>Submit</button> 
                             </Nav.Link>        
                     </Row>
                     <Row>
-                        <Nav.Link className="me-auto p-2">
+
+                        <Col className="ms-auto p-2">
+                        <Nav.Link >
                            <button value="Mot de passe oublié" >Mot de passe oublié</button> 
                         </Nav.Link>
+                        </Col>
+                        <Col className="d-flex flex-row-reverse p-2">
+                        <Nav.Link
+                                
+                                as={Link} to="/RegisterClient"
+                               
+                            >
+                             <button>SignUp </button>
+                        </Nav.Link>
+
+                        </Col>
+                        
                     </Row>
+                   
                 </Row>
                 
             </Card>

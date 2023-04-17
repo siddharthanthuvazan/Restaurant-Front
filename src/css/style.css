@@ -1,27 +1,193 @@
-.margin-1 { margin: 1rem; }
-.text-line-through { text-decoration: line-through; }
-.cursor-pointer { cursor: pointer; }
-.h-200 { height: 200%; }
-
-
-
-.navbar-brand{
-    cursor: pointer;
-}
-
-body, html {
+html, body {
     height: 100%;
-}
+  }
   
-.bg {
-    /* The image used */
-    /* background-image: url("restaurant.png"); */
-  
-    /* Full height */
-    height: 100%;
-  
-    /* Center and scale the image nicely */
-    background-position: center;
+  body {
+    background: url('/public/pictures/restaurant.png');
+    margin: 0;
+    padding: 0;
+    background-image: url('/public/pictures/restaurant.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    
+  }
+  .full-bg {
+    height: 100%;
+    /* other styles */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  .container .title {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .container .products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .container .products-container .product {
+    text-align: center;
+    padding: 3rem 2rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    outline: .1rem solid #ccc;
+    outline-offset: -1.5rem;
+    cursor: pointer;
+  }
+  
+  .container .products-container .product Image {
+    height: 25rem;
+  }
+  
+  .container .products-container .product:hover Image {
+    transform: scale(.9);
+  }
+  
+  .container .products-container .product:hover {
+    outline: .2rem solid #222;
+  }
+  
+  .container .products-container .product h3 {
+    padding: .5rem 0;
+    font-size: 2rem;
+  }
+  
+  .container .products-container .product .price {
+    font-size: 2rem;
+  }
+ 
+   
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.8); /* Background shade */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-box {
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  
+  .popup {
+    background-color: #a9c4d7;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .popup-box img {
+    max-width: 100%;
+  }
+  
+  .popup h3 {
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  
+  
+  .popup p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .popup .price {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .popup .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup .buttons a {
+    display: inline-block;
+    background-color: #c94b4b;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    margin: 0px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .popup .buttons a:hover {
+    background-color: #130303;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-3px);
+  }
+  .popup .stars{
+    padding: 1rem 0;
+    font-size: 1.7rem;
+    color: #202221;
+
+  }
+  .popup .stars i{
+   color: #27ae60;
+  }
+  
+  .popup .preview .stars span{
+    color: #1f2421;
+   }
+
+   .popup .preview {
+    color: #0c0e0d;
+   }
+
+
+  @media(max-width:991px) {
+    .container .products-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:768px) {
+    .container .products-container {
+        grid-template-columns: 1fr;
+    }
+
+    .container .products-container .product img {
+        height: 20rem;
+    }
+}
+
+@media(max-width:450px) {
+    .container .products-container .product h3 {
+        font-size: 1.5rem;
+    }
+
+    .container .products-container .product .price {
+        font-size: 1.5rem;
+    }
 }

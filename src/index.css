@@ -1,3 +1,7 @@
 .rc-time-picker-clear {
     line-height: 15px !important;
   }
+
+html, body {
+  height: 100%;
+}

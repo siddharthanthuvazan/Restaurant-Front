@@ -13,15 +13,7 @@ export default function ReservationController(props){
         };
         fetch(backUrl + "/save", requestOptions)
         .then((response) => console.log(response.data))
-        .catch((error) => console.log(error));
-            // .then(response => response.json())
-            // .then(json => props.setReservation({ 
-            //     token: json.token,
-            //     id: json.Reservation.id,
-            //     name: json.Reservation.nom,
-            //     surname: json.Reservation.prenom
-            // }));
-            
+        .catch((error) => console.log(error));            
     }
 
     return (
