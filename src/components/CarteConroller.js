@@ -1,73 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { Card, CardGroup, Image, Button, Container } from "react-bootstrap";
-import Panier from "./Panier";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Button, Card, Container, Image } from "react-bootstrap";
 
 
-export default function CarteController(props) {
+
+ function CarteController(props) {
   const backUrl = "http://localhost:8081/carte";
-  const [menuList, setMenuList] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
-  const [selectedCarte, setSelectedCarte] = useState({});
-  const [cartItems, setCartItems] = useState([]);
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     fetch(`${backUrl}/getCarte`)
       .then((response) => response.json())
-      .then((data) => {
-        setMenuList(data);
-      })
+      .then(data => setItems(data))
       .catch((error) => {
         console.error("Error fetching menu list:", error);
       });
   }, []);
 
-  const handleClose = () => {
-    setShowPreview(false);
+  useEffect(() => {
+    if (selectedItem) {
+      setTotalPrice(selectedItem.prix * quantity);
+    }
+  }, [quantity, selectedItem]);
+
+  const addToCart = () => {
+    const updatedItem = { ...selectedItem };
+    updatedItem.quantity = quantity;
+    updatedItem.totalPrice = totalPrice;
+    props.addToCart(updatedItem);
+    setQuantity(1);
+    hideDetails();
+  };
+  
+  const hideDetails = () => {
+    setSelectedItem(null);
+  }
+  const showDetails = (item) => {
+    setSelectedItem(item);
+  }
+
+  const incrementQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+    setTotalPrice(prevTotalPrice => prevTotalPrice + selectedItem.prix);
   };
 
-  const handleClick = (carte) => {
-    setSelectedCarte(carte);
-    setShowPreview(true);
+  const decrementQuantity = () => {
+    if (quantity === 1) {
+      return;
+    }
+    setQuantity(prevQuantity => prevQuantity - 1);
+    setTotalPrice(prevTotalPrice => prevTotalPrice - selectedItem.prix);
   };
 
-  const addToCart = (carte) => {
-    setCartItems([...cartItems, { id: carte.id, title: carte.titre, price: carte.prix }]);
-    setShowPreview(false);
-  };
+  // const addToCart = (item) => {
+  //   props.addToCart(item);
+  // }
 
-  const handleCheckout = () => {
-    fetch(`${backUrl}/checkoutOrder`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartItems),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Order has been checked out:", data);
-      })
-      .catch((error) => {
-        console.error("Error checking out the order:", error);
-      });
-  };
   return (
     <Container>
       <div className="carte">
         <div className="container">
           <h3 className="title">Menu</h3>
           <div className="products-container" data-name="menus">
-            {menuList.map((carte) => (
-              <div key={carte.id} className="cards">
-                <div onClick={() => handleClick(carte)}>
+            {items.map((item) => (
+              <div key={item.id} className="cards">
+                <div onClick={() => showDetails(item)}>
                   <div className="product">
-                    <Image src={carte.image} width="100%" />
-                    <h3 className="title">{carte.titre}</h3>
+                    <Image src={item.image} width="100%" />
+                    <h3 className="title">{item.titre}</h3>
                     <div className="price">
                       <span>
                         <i className="fa fa-eur" aria-hidden="true"></i>
-                        {carte.prix}
+                        {item.prix}
                       </span>
                     </div>
                   </div>
@@ -77,190 +83,27 @@ export default function CarteController(props) {
           </div>
         </div>
       </div>
-      {showPreview && (
+      {selectedItem && (
         <div className="popup">
           <div className="popup-content">
-            <div className="preview active" data-target="menus">
-              <i
-                className="fa-sharp fa-regular fa-circle-xmark"
-                style={{ padding: "20px" }}
-                onClick={handleClose}
-              ></i>
-              <Image src={selectedCarte.image} />
-              <h3>{selectedCarte.titre}</h3>
-              <div className="stars">
+            <span className="close" onClick={hideDetails}>&times;</span>
+            <h2>{selectedItem.titre}</h2>
+            <Image src={selectedItem.image} fluid />
+            <p>{selectedItem.description}</p>
+            <div className="stars">
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star-half-alt"></i>
               </div>
-              <div>
-                <p>{selectedCarte.description}</p>
-                <div className="price">
-                  <span>
-                    <i className="fa fa-eur" aria-hidden="true"></i>
-                    {selectedCarte.prix}
-                  </span>
-                </div>
-                <div className="buttons">
-                  <Link
-                    to="/panier"
-                    className="cart"
-                    onClick={() => handleClick(addToCart(selectedCarte))}
-                  >
-                    Add to Cart
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <p>{selectedItem.prix} €</p>
+            <Button onClick={() => addToCart(selectedItem)}>Add to Cart</Button>
           </div>
         </div>
       )}
-  
-      <Panier cartItems={cartItems} />
     </Container>
   );
-  } 
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export default function CarteController( props) {
-//   const backUrl = "http://localhost:8081/carte";
-//   const [menuList, setMenuList] = useState([]);
-//   const [showPreview, setShowPreview] = useState(false);
-//   const [selectedCarte, setSelectedCarte] = useState({});
-//   const [cartItems, setCartItems] = useState([]);
-  
-//   useEffect(() => {
-//     fetch(`${backUrl}/getCarte`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setMenuList(data);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching menu list:", error);
-//       });
-//   }, []);
-
-//   const handleClose = () => {
-//     setShowPreview(false);
-//   };
-
-//   const handleClick = (carte) => {
-//     setSelectedCarte(carte);
-//     setShowPreview(true);
-//     setCartItems([...cartItems, { id: carte.id, title: carte.titre, price: carte.prix }]);
-//   };
-//   const addToCart = (carte) => {
-//     setCartItems([...cartItems, carte]);
-//     setShowPreview(false);
-//   };
-//   // function handleAddToCart(item) {
-//   //   props.addToCart(item);
-//   // }
-
-
-//   const handleCheckout = () => {
-//     fetch(`${backUrl}/checkoutOrder`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(cartItems),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log("Order has been checked out:", data);
-//       })
-//       .catch((error) => {
-//         console.error("Error checking out the order:", error);
-//       });
-//   };
-
-//   return (
-//     <Container>
-//       <div className="carte">
-//         <div className="container">
-//           <h3 className="title">Menu</h3>
-//           <div className="products-container" data-name="menus">
-//             {menuList.map((carte) => (
-//               <div key={carte.id} className="cards">
-//                 <div onClick={() => handleClick(carte)}>
-//                   <div className="product">
-//                     <Image src={carte.image} width="100%" />
-//                     <h3 className="title">{carte.titre}</h3>
-//                     <div className="price">
-//                       <span>
-//                         <i className="fa fa-eur" aria-hidden="true"></i>
-//                         {carte.prix}
-//                       </span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//       {showPreview && (
-//         <div className="popup">
-//           <div className="popup-content">
-//             <div className="preview active" data-target="menus">
-//               <i className="fa-sharp fa-regular fa-circle-xmark" style={{padding:'20px'}} onClick={handleClose}></i>
-//               <Image src={selectedCarte.image} />
-//               <h3>{selectedCarte.titre}</h3>
-//                  <div className="stars">
-//                    <i className="fas fa-star"></i>
-//                    <i className="fas fa-star"></i>
-//                    <i className="fas fa-star"></i>
-//                <i className="fas fa-star"></i>
-//                    <i className="fas fa-star-half-alt"></i>
-//                   </div>
-//               <div>
-//                 <p>{selectedCarte.description}</p>
-//                 <div className="price">
-//                   <span>
-//                     <i className="fa fa-eur" aria-hidden="true"></i>
-//                     {selectedCarte.prix}
-//                   </span>
-//                 </div>
-//                 <div className="buttons">
-//                 <Link to="/panier" className="cart" onClick={() => addToCart(selectedCarte)}>Add to Cart</Link>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//     <Panier cart={cartItems}/>
-//     </Container>
-  
-    
-//     );
-   
-// }
+  export default CarteController;

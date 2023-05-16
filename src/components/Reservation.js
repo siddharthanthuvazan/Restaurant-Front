@@ -10,7 +10,7 @@ export default function Reservation(props){
     
     
 
-    const [fields, setFields] = useState({ name:"", surname:"", dateOfReservation:"", noOfPersons:"", email:""});
+    const [fields, setFields] = useState({ name:"", surname:"",timeOfReservation:"", dateOfReservation:"", noOfPersons:"", email:""});
 
 
  return(
@@ -63,9 +63,9 @@ export default function Reservation(props){
              </Col>
              <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                  <InputGroup className="mb-3">
-                     <InputGroup.Text id="inpDate"><i className="fa fa-user" aria-hidden="true"></i></InputGroup.Text>
+                     <InputGroup.Text id="inpDate"><i className="fa fa-calendar" aria-hidden="true"></i></InputGroup.Text>
                      <Form.Control 
-                         type="text"
+                         type="date"
                          aria-describedby="inpDate"
                          placeholder="Date(YYYY-MM-DD)"
                          value={fields.dateOfReservation}
@@ -75,92 +75,36 @@ export default function Reservation(props){
                 
              </Col>      
         </Row>
+        <Row className="p-2">
+             <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
+                <output className="text-white">Time Of Reservation</output>
+             </Col>
+             <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
+                 <InputGroup className="mb-3">
+                     <InputGroup.Text id="inpTime"><i className="fa fa-clock" aria-hidden="true"></i></InputGroup.Text>
+                     <Form.Control 
+                         type="time"
+                         aria-describedby="inpTime"
+                         placeholder="Time(hh:mm)"
+                         value={fields.timeOfReservation}
+                         onChange={form => setFields({...fields, timeOfReservation: form.target.value})}
+                     />
+                 </InputGroup>
+                
+             </Col>      
+        </Row>
         
      
 
 
-        {/* <Row onSubmit={handleSubmit} className=" p-2">
-            <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-                <output className="text-white">Date of reservation</output>
-            </Col>
-            
-            <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="inpDate"><i className="fa fa-calendar" aria-hidden="true"></i></InputGroup.Text>
-                        <Col>
-                        <ReactDatetimeClass
-                          aria-describedby="inpDate"
-                         onChange={handleDateChange} 
-                         value={fields.dateOfReservation}
-                        />
-                        </Col>
-                       
-                        
-                        {/* onChange={form => setFields({...fields, dateOfReservation: form.target.value})} 
-                       
-                        
-                    </InputGroup>
-                
-            </Col>   
-          
-            
-        </Row> */}
-
-
-
-        {/* /////// */}
-        {/* <Row className=" p-2">
-            <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-                <output className="text-white">Date of reservation</output>
-            </Col>
-            <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="inpLogin"><i className="fa fa-calendar" aria-hidden="true"></i></InputGroup.Text>
-                        <DatePicker 
-                        value={fields.dateOfReservation}
-                        onChange={form => setFields({...fields, dateOfReservation: form.target.value})}
-                        />
-                        
-                    </InputGroup>
-                
-            </Col>   
-        </Row>
-        <Row className="p-2">
-            <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-
-            <output className="text-white">Time</output>
-                 
-            </Col>
-            <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7} className=".rc-time-picker-clear"> 
-                <InputGroup className="mb-3">
-                <InputGroup.Text id="inpSurName"><i className ="fa fa-clock" aria-hidden="true"></i></InputGroup.Text>
-                <Col>
-                <TimePicker
-                     placeholder="Select Time"
-                     use12Hours
-                     showSecond={false}
-                     focusOnOpen={true}
-                     format="hh:mm A"
-                     onChange={e => setTime(e.format('LT'))}
-                    />
-                </Col>
-                    
-                  // <Col>  <p>Selected Time: {time || '-'}</p> </Col>
-                    
-                    
-                </InputGroup>
-                       
-                 
-            </Col>
-             
-        </Row> */}
+       
         <Row className="p-2">
              <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
                 <output className="text-white">No. Of Persons</output>
              </Col>
              <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                  <InputGroup className="mb-3">
-                     <InputGroup.Text id="inpPersons"><i className="fa fa-user" aria-hidden="true"></i></InputGroup.Text>
+                     <InputGroup.Text id="inpPersons"><i className="fa fa-users" aria-hidden="true"></i></InputGroup.Text>
                      <Form.Control 
                          type="text"
                          aria-describedby="inpPersons"
@@ -195,7 +139,7 @@ export default function Reservation(props){
                  
             <Nav.Link
                 className="btn btn-justify-content-center"
-                onClick={ () => props.fetchReservation(fields.name,fields.surname,fields.dateOfReservation,fields.noOfPersons,fields.email)}
+                onClick={ () => props.fetchReservation(fields.name,fields.surname,fields.dateOfReservation,fields.timeOfReservation,fields.noOfPersons,fields.email)}
              >
              Submit
             </Nav.Link>        

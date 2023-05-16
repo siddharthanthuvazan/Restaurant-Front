@@ -34,7 +34,11 @@ import Connection from "./Connection";
 
 
    return(
+    <>
     <Connection fetchClient ={(name,password)=>fetchClient(name,password)}/>
+    
    
+    </>
+    
    );
 }

@@ -17,90 +17,102 @@ html, body {
     height: 100%;
     /* other styles */
   }
-  
+
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 2rem;
   }
   
-  .container .title {
-    font-size: 3.5rem;
-    margin-bottom: 3rem;
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
     text-transform: uppercase;
     text-align: center;
   }
   
-  .container .products-container {
+  .products-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+    justify-content: center;
   }
   
-  .container .products-container .product {
+  .product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
-    padding: 3rem 2rem;
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-    outline: .1rem solid #ccc;
-    outline-offset: -1.5rem;
+    width: 100%;
+    height: 300px;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 .2rem .5rem rgba(0, 0, 0, .1);
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
   
-  .container .products-container .product Image {
-    height: 25rem;
+  .product img {
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 1rem;
   }
   
-  .container .products-container .product:hover Image {
-    transform: scale(.9);
+  .product:hover {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    transform: translateY(-.5rem);
   }
   
-  .container .products-container .product:hover {
-    outline: .2rem solid #222;
-  }
-  
-  .container .products-container .product h3 {
+  .product h3 {
     padding: .5rem 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
   
-  .container .products-container .product .price {
-    font-size: 2rem;
+  .price {
+    font-size: 1.5rem;
   }
- 
-   
+  
+
   .popup {
     position: fixed;
-    top: 0;
+    z-index: 1;
     left: 0;
-    width: 80%;
-    height: 90%;
-    background-color: rgba(0, 0, 0, 0.8); /* Background shade */
-    z-index: 9999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .popup-box {
+  .popup-content {
     background-color: #fff;
-    width: 80%;
-    max-width: 600px;
     padding: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
     text-align: center;
+    align-items: center;
   }
   
-  
-  .popup {
-    background-color: #a9c4d7;
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
+  .popup-content h2 {
+    margin-top: 0;
   }
   
-  .popup-box img {
+  .popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+  .popup-content img {
     max-width: 100%;
   }
   
@@ -190,4 +202,82 @@ html, body {
     .container .products-container .product .price {
         font-size: 1.5rem;
     }
+}
+.payment-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.payment-form label {
+  flex-basis: 100%;
+  margin-bottom: 5px;
+}
+
+.payment-form input {
+  flex-basis: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.payment-form button[type="submit"] {
+  flex-basis: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-form button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+@media screen and (min-width: 768px) {
+  .payment-form label {
+    flex-basis: 30%;
+    margin-bottom: 0;
+  }
+
+  .payment-form input {
+    flex-basis: 65%;
+    margin-bottom: 0;
+  }
+
+  .payment-form .card-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .payment-form .card-row .card-details {
+    flex-basis: 48%;
+    margin-bottom: 10px;
+  }
+
+  .payment-form .card-row .card-details:nth-child(2) {
+    margin-left: 4%;
+  }
+
+  .payment-form .card-row .card-details label {
+    flex-basis: 100%;
+  }
+
+  .payment-form .card-row .card-details input {
+    flex-basis: 100%;
+  }
+
+  .payment-form .submit-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .payment-form .submit-row button[type="submit"] {
+    flex-basis: 100px;
+    margin-top: 10px;
+  }
 }

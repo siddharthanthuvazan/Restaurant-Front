@@ -5,11 +5,11 @@ import Reservation from "./Reservation";
 export default function ReservationController(props){
     const backUrl = "http://localhost:8081/reservation";
 
-    function fetchReservation(name, surname,dateOfReservation,noOfPersons,email) {
+    function fetchReservation(name, surname,dateOfReservation,timeOfReservation,noOfPersons,email) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name:name, surname:surname,dateOfReservation:dateOfReservation,noOfPersons:noOfPersons,email:email})
+            body: JSON.stringify({ name:name, surname:surname,dateOfReservation:dateOfReservation,timeOfReservation:timeOfReservation,noOfPersons:noOfPersons,email:email})
         };
         fetch(backUrl + "/save", requestOptions)
         .then((response) => console.log(response.data))
@@ -17,7 +17,7 @@ export default function ReservationController(props){
     }
 
     return (
-        <Reservation fetchReservation = {(name, surname,dateOfReservation,noOfPersons,email) => fetchReservation(name, surname,dateOfReservation,noOfPersons,email)} />
+        <Reservation fetchReservation = {(name, surname,dateOfReservation,timeOfReservation,noOfPersons,email) => fetchReservation(name, surname,dateOfReservation,timeOfReservation,noOfPersons,email)} />
     )
 }
 
