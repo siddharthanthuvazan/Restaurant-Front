@@ -4,7 +4,7 @@ import { Button, Card, Container, Image } from "react-bootstrap";
 
 
  function CarteController(props) {
-  const backUrl = "http://localhost:8081/carte";
+  const backUrl = "http://34.155.218.31:8081/carte";
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -54,9 +54,7 @@ import { Button, Card, Container, Image } from "react-bootstrap";
     setTotalPrice(prevTotalPrice => prevTotalPrice - selectedItem.prix);
   };
 
-  // const addToCart = (item) => {
-  //   props.addToCart(item);
-  // }
+
 
   return (
     <Container>

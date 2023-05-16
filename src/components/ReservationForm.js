@@ -17,7 +17,7 @@ const UserForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8081/reservation/save", reservation)
+      .post("http://34.155.218.31:8081/reservation/save", reservation)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };

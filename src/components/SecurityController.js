@@ -8,7 +8,7 @@ import Connection from "./Connection";
 
    
 
-    const backUrl = "http://localhost:8081/security";
+    const backUrl = "http://34.155.218.31:8081/security";
 
     function fetchClient(login, password) {
         const requestOptions = {
@@ -28,16 +28,9 @@ import Connection from "./Connection";
             
        }
 
-     
-    
-    
-
-
    return(
     <>
     <Connection fetchClient ={(name,password)=>fetchClient(name,password)}/>
-    
-   
     </>
     
    );

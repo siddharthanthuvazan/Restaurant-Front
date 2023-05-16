@@ -2,9 +2,6 @@ import React,{useState} from "react";
 import {Link} from "react-router-dom";
 import{Col,Form,InputGroup,Nav,Row,Card} from "react-bootstrap";
 
-
-
-
 export default function Connection(props){
     
     
