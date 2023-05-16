@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-// import logo from '/Users/Formation/Documents/projet 3/code/Restaurant-react-Front/public/pictures/logo.png';
-import logo from 'logo.png';
+
+import logo from '../css/picture/logo.png';
 
 import "../css/sandstone.min.css";
 import "../css/fontawesome.all.min.css";
