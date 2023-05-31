@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import PaymentForm from './PaymentForm';
+import { useNavigate } from 'react-router-dom';
 
 function Cart(props) {
   const cart = props.cart;
+  const navigate = useNavigate();
 
-  const [paymentMethod, setPaymentMethod] = useState('CASH_ON_DELIVERY');
+  const [paymentMethod, setPaymentMethod] = useState('CASH ON DELIVERY');
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + item.totalPrice, 0);
@@ -43,7 +45,14 @@ function Cart(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Selected payment method: ${paymentMethod}`);
-    // Here you can handle the payment process using the selected payment method
+
+    const order = {
+      cart: cart,
+      totalPrice: getTotalPrice(),
+      paymentMethod: paymentMethod,
+    };
+
+    navigate('/order-confirmation', { state: order });
   };
 
   return (
@@ -52,7 +61,7 @@ function Cart(props) {
       {cart.length > 0 ? (
         <div>
           {cart.map((item, index) => (
-            <div className="cart-item" key={item.id} >
+            <div className="cart-item" key={index}>
               <h3>{item.titre}</h3>
               <p>Quantity: {item.quantity}</p>
               <Button className="quantity-button" onClick={() => decrementQuantity(index)}>
@@ -70,7 +79,7 @@ function Cart(props) {
             </div>
           ))}
           <p>Total Price: {getTotalPrice()} €</p>
-    
+
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Select Payment Method</Form.Label>
@@ -84,11 +93,11 @@ function Cart(props) {
               </Form.Control>
             </Form.Group>
 
-            {paymentMethod !== 'CASH_ON_DELIVERY' && (
-              <PaymentForm paymentMethod={paymentMethod} />
-            )}
+            {paymentMethod !== 'CASH_ON_DELIVERY' && <PaymentForm paymentMethod={paymentMethod} />}
 
-            <Button variant="primary" type="submit">Place Order</Button>
+            <Button variant="primary" type="submit">
+              Place Order
+            </Button>
           </Form>
         </div>
       ) : (
@@ -99,10 +108,5 @@ function Cart(props) {
 }
 
 export default Cart;
-
-
-
-
-
 
 

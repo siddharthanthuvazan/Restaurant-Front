@@ -37,7 +37,7 @@ export default function Connection(props){
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="inpPassword"><i className="fa fa-key"></i></InputGroup.Text>
                             <Form.Control 
-                                type="text" 
+                                type="password" 
                                 aria-describedby="inpPassword"
                                 placeholder="Veuillez entrer un mot de passe"
                                 value={fields.password}
@@ -59,10 +59,14 @@ export default function Connection(props){
                     <Row>
 
                         <Col className="ms-auto p-2">
-                        <Nav.Link >
-                           <button value="Mot de passe oublié" >Mot de passe oublié</button> 
+                        <Nav.Link  
+                            as={Link} to="/Administrator" 
+                           onClick={() => props.fetchClient(fields.login, fields.password)}
+                        >
+                           <button>SignIn as Administrator</button> 
                         </Nav.Link>
                         </Col>
+
                         <Col className="d-flex flex-row-reverse p-2">
                         <Nav.Link
                                 

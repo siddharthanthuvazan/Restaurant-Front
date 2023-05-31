@@ -3,7 +3,7 @@ import RegisterClient from "./RegisterClient";
 
 
 export default function RegisterClientController(props){
-    const backUrl = "http://34.155.218.31:8081/user";
+    const backUrl = "http://localhost:8081/user";
 
     function saveClient( nom, prenom, email, password, telephone,
         noAdd,streetName, postalCode, cityName) {

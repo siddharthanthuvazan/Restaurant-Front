@@ -27,7 +27,7 @@ function PaymentForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('http://34.155.218.31:8081/payment/add', {
+    fetch('http://localhost:8081/payment/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

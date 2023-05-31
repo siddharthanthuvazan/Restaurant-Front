@@ -1,4 +1,4 @@
-const baseUrl = "http://34.155.218.31:8081/product";
+const baseUrl = "http://localhost:8081/product";
 
 const ProductService = {
   getAllProducts: (callback) => {

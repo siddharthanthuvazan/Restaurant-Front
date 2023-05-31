@@ -3,7 +3,7 @@ import Reservation from "./Reservation";
 
 
 export default function ReservationController(props){
-    const backUrl = "http://34.155.218.31:8081/reservation";
+    const backUrl = "http://localhost:8081/reservation";
 
     function fetchReservation(name, surname,dateOfReservation,timeOfReservation,noOfPersons,email) {
         const requestOptions = {
